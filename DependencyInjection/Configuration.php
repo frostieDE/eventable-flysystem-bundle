@@ -12,7 +12,9 @@ class Configuration implements ConfigurationInterface {
 
         $rootNode
             ->children()
-                ->arrayNode('filesystems')->end()
+                ->arrayNode('filesystems')
+                    ->scalarPrototype()->end()
+                ->end()
                 ->scalarNode('event_dispatcher')
                     ->defaultValue('event_dispatcher')
                 ->end()
