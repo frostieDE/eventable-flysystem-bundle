@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^7.1|^7.2",
-        "symfony/framework-bundle": "^3.3|4.0",
+        "symfony/framework-bundle": "^3.3|^4.0",
         "frostiede/eventable-flysystem": "^1.0",
         "oneup/flysystem-bundle": "^3.0"
     },
