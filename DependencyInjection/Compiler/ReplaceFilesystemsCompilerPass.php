@@ -2,6 +2,7 @@
 
 namespace FrostieDE\EventableFlysystemBundle\DependencyInjection\Compiler;
 
+use FrostieDE\EventableFlysystem\EventableFilesystem;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -22,8 +23,13 @@ class ReplaceFilesystemsCompilerPass implements CompilerPassInterface {
                     ->setDefinition($filesystemId, new Definition(EventableFilesystem::class))
                     ->setArgument(0, new Reference($eventDispatcherId))
                     ->setArgument(1, $originalDefinition->getArgument(0))
-                    ->setArgument(2, $originalDefinition->getArgument(1))
-                    ->addTag('oneup_flysystem.filesystem', $tag);
+                    ->setArgument(2, $originalDefinition->getArgument(1));
+
+                if(count($tag) > 0) {
+                    $container
+                        ->getDefinition($filesystemId)
+                        ->addTag('oneup_flysystem.filesystem', $tag[0]);
+                }
 
                 $newDefinition = $container->getDefinition($filesystemId);
 
